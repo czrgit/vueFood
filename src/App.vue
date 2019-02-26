@@ -1,14 +1,26 @@
 <template>
   <div id="app">
     <router-view/>
-    <FooterGuide v-if="!($route.meta.noFoot)"/><!--是否显示底部导航-->
+    <FooterGuide v-if="$route.meta.noFoot"/><!--是否显示底部导航-->
   </div>
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import FooterGuide from './components/FooterGuide/FooterGuide'
   export default {
     name: 'App',
+    mounted(){
+      // this.$store.dispatch('getAddress')
+      this.getAddress()
+      this.getUserInfo()
+
+
+    },
+    methods:{
+      ...mapActions(['getAddress','getUserInfo']),
+
+    },
     components:{
       FooterGuide
     }
